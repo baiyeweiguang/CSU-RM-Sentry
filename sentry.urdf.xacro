@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="sentry"
+  xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="xyz" default="0.10 0 0.05" />
+  <xacro:arg name="rpy" default="0 0 0" />
+
+  <link name="livox_frame" />
+
+  <link name = "base_link" />
+
+  <joint name="base_joint" type="fixed">
+    <origin xyz="-0.105 0 -0.460" rpy="0 0 0" />
+    <parent link="livox_frame" />
+    <child link="base_link" />
+    <axis xyz= "0 0 0" />
+  </joint>
+
+  <!-- <link name="gimbal_imu" /> -->
+
+  <link name="gimbal_link" />
+
+  <joint name="gimbal_joint" type="floating">
+    <parent link="livox_frame" />
+    <child link="gimbal_link" />
+  </joint>
+
+  <link name="camera_link" />
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="$(arg xyz)" rpy="$(arg rpy)" />
+    <parent link="gimbal_link" />
+    <child link="camera_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="camera_optical_frame" />
+
+  <joint name="camera_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
+    <parent link="camera_link" />
+    <child link="camera_optical_frame" />
+  </joint>
+
+</robot>

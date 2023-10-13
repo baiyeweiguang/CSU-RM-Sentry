@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>rplidar_ros</name>
+  <version>2.1.3</version>
+  <description>
+    The rplidar ros package, support rplidar A1/A2/A3/S1/S2/S3/T1
+  </description>
+
+  <maintainer email="deyou.wang@slamtec.com">Wang DeYou</maintainer>
+  <author email="ros@slamtec.com">Slamtec ROS Maintainer</author>
+  <license>BSD</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+  <buildtool_depend>ament_cmake_ros</buildtool_depend>
+
+  <build_depend>rclcpp</build_depend>
+  <!-- <build_depend>rosconsole</build_depend> -->
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_srvs</build_depend>
+  <build_depend>rclcpp_components</build_depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <!-- <exec_depend>rosconsole</exec_depend> -->
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>rclcpp_components</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
