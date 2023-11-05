@@ -4,7 +4,7 @@
 
 文件的命名参考了rm_vision项目
 
-**Author: 邹承甫** 
+**作者: 邹承甫** 
 
 **找我交流: 3548054568(QQ)**
 
@@ -20,7 +20,7 @@
 |-|-|
 |<img src="assets/segment.png"/>|<img src="assets/rviz.png"/>|
 
-## 1. Framework框架
+## 1. 框架
 
 - **rm_bringup** (启动相机驱动，串口驱动，自瞄程序和robot_state_publisher，参考rm_vision项目)
 - **rm_interfaces** (自定义msg和srv)
@@ -38,7 +38,7 @@
     - [**pointcloud_to_laserscan**](https://github.com/ros-perception/pointcloud_to_laserscan) (将PointCloud2转换为LaserScan)
 - **rm_sensors** (传感器的驱动)
     - [**livox_ros_driver2**](https://github.com/Livox-SDK/livox_ros_driver2) (MID360驱动，我们的MID360安装在机器人脑门上，只能获得正前方的点云)
-    - [**rplidar_ros2**](https://github.com/Slamtec/rplidar_ros) (思岚2d雷达，安装在背面，只用来更新local_costmap，不参与建图，如果不考虑后退的话可以去掉)
+    - [**rplidar_ros2**](https://github.com/Slamtec/rplidar_ros) (可选，思岚2d雷达，安装在背面，只用来更新local_costmap，不参与建图，如果不考虑后退的话可以去掉)
 
 
 ```sh
@@ -69,10 +69,42 @@ src
 |
 └── rm_sensors
     ├── livox_ros_driver2
-    └── rplidar_ros
+    └── rplidar_ros(optional)
 ```
 
-## 2. Dependencies依赖
+## 2. 安装
+
+安装ros-humble-desktop-full，参考 [ROS2官方文档](https://docs.ros.org/en/humble/index.html)
+
+安装Livox-SDK2，参考 [LIVOX-SDK2官方仓库](https://github.com/Livox-SDK/Livox-SDK2)
+
+克隆仓库到本地
+
+```bash
+git clone https://github.com/CSU-FYT-Vision/CSU-RM-Sentry && cd CSU-RM-Sentry
+```
+
+安装依赖
+
+```bash
+sudo apt-get install -y  libpcl-ros-dev
+rosdep install --from-paths src --ignore-src -r -y
+```
+
+编译
+```bash
+colcon build --symlink-install
+```
+
+运行
+```bash
+# 建图
+./mapping.sh
+# 导航
+./nav.sh
+```
+
+## 2. 依赖
 
 - **系统**
   - Ubuntu 22.04
