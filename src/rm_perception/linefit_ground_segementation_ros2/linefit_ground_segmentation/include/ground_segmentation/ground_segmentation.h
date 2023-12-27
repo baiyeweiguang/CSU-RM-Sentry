@@ -55,6 +55,12 @@ struct GroundSegmentationParams {
   double line_search_angle;
   // Number of threads.
   int n_threads;
+  // Minimum point distance.
+  double r_min;
+  // Maximum point distance.
+  double r_max;
+  // Maximum error of a point during line fit.
+  double max_fit_error;
 };
 
 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;

@@ -1,5 +1,5 @@
 #include <pcl/io/ply_io.h>
-#include <pcl_ros/point_cloud.h>
+// #include <pcl_ros/point_cloud.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
 
@@ -34,6 +34,10 @@ int main(int argc, char **argv) {
     params.line_search_angle =
         node->declare_parameter("line_search_angle", params.line_search_angle);
     params.n_threads = node->declare_parameter("n_threads", params.n_threads);
+    params.r_min = node->declare_parameter("r_min", params.r_min);
+    params.r_max = node->declare_parameter("r_max", params.r_max);
+    params.max_fit_error =
+        node->declare_parameter("max_fit_error", params.max_fit_error);
         // Params that need to be squared.
     double r_min, r_max, max_fit_error;
     if (node->get_parameter("r_min", r_min)) {

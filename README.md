@@ -20,11 +20,16 @@
 |-|-|
 |<img src="assets/segment.png"/>|<img src="assets/rviz.png"/>|
 
+**该项目高度参考了以下开源项目，感谢他们**
+
+- [**rm_vision**](https://gitlab.com/rm_vision): 陈君开源的rm_vision项目
+- [**TUP-Sentry-Framwork**](https://github.com/tup-robomaster/TUP2023-Sentry-Framework): 沈阳航空航天大学哨兵导航框架
+
 ## 1. 框架
 
 - **rm_bringup** (启动相机驱动，串口驱动，自瞄程序和robot_state_publisher，参考rm_vision项目)
 - **rm_interfaces** (自定义msg和srv)
-- **rm_description** (机器人的urdf)
+- **rm_robot_description** (机器人的urdf)
 - **rm_autoaim** (自瞄算法，基于陈君rm_vision项目做了一点修改)
 - **rm_camera_driver** (工业相机驱动)
 - **rm_serial_driver** (和下位机进行通信的串口驱动程序，参考rmoss开源项目)
@@ -37,8 +42,8 @@
     - [**linefit_ground_segmentation**](https://github.com/lorenwel/linefit_ground_segmentation) (点云分割)
     - [**pointcloud_to_laserscan**](https://github.com/ros-perception/pointcloud_to_laserscan) (将PointCloud2转换为LaserScan)
 - **rm_sensors** (传感器的驱动)
-    - [**livox_ros_driver2**](https://github.com/Livox-SDK/livox_ros_driver2) (MID360驱动，我们的MID360安装在机器人脑门上，只能获得正前方的点云)
-    - [**rplidar_ros2**](https://github.com/Slamtec/rplidar_ros) (可选，思岚2d雷达，安装在背面，只用来更新local_costmap，不参与建图，如果不考虑后退的话可以去掉)
+    - [**livox_ros_driver2**](https://github.com/Livox-SDK/livox_ros_driver2) (MID360驱动)
+
 
 
 ```sh
@@ -48,7 +53,7 @@ src
 |
 ├── rm_interfaces
 |
-├── rm_description           
+├── rm_robot_description           
 |
 ├── rm_autoaim                
 |
@@ -97,6 +102,9 @@ colcon build --symlink-install
 ```
 
 运行
+
+> 运行前请按照实际机器人情况，修改rm_robot_description/urdf/rm_robot.urdf中的坐标系定义
+
 ```bash
 # 建图
 ./mapping.sh
@@ -104,7 +112,19 @@ colcon build --symlink-install
 ./nav.sh
 ```
 
-## 2. 依赖
+- 如何移植到自己的机器人上？
+  - 1. 修改rm_robot.urdf中的坐标系定义
+  - 2. 修改rm_sensors/livox_ros_driver2中的mid360外参
+  - 3. 根据实际情况修改rm_localization/linefit_ground_segmentation_ros/launch/segmentation_params.yaml中的sensor_height参数
+  - 4. 根据实际情况修改rm_perception/pointcloud_to_laserscan/launch/pointcloud_to_laserscan_launch.py中min_height和max_height参数
+  - 5. 根据需求修改nav2的参数
+  - 6. 你可能还要调一调FAST_LIO的参数和linefit_ground_segmentation的参数以达到最好效果
+
+
+- 如何配合rm_vision？
+  - 将rv中的robot_gimbal_description去掉，将rm_serial_driver中发布的odom->gimbal_link的变换改为base_link->gimbal_link的变换
+
+## 3. 依赖
 
 - **系统**
   - Ubuntu 22.04
@@ -114,7 +134,7 @@ colcon build --symlink-install
   - libpcl-ros-dev
   - eigen、pcl、opoencv、ceres等
 
-## 3. 硬件
+## 4. 硬件
 
 - **Mini PC** 
     - cpu: AMD Ryzen R7 7735HS 

@@ -1,0 +1,33 @@
+/camera_driver:
+  ros__parameters:
+    # 。。。
+
+/video_player:
+  ros__parameters:
+    # 。。。
+
+/serial_driver:
+  ros__parameters:
+    timestamp_offset: 0.006
+    port_name: "/dev/ttyUART"
+    protocol: "sentry" 
+
+
+/virtual_serial:
+  ros__parameters:
+    vision_mode: 0
+
+/armor_detector:
+  ros__parameters:
+    # 。。。
+/armor_solver:
+  ros__parameters:
+    # 。。。
+
+/rune_detector:
+  ros__parameters:
+    # 。。。
+
+/rune_solver:
+  ros__parameters:
+    # 。。。

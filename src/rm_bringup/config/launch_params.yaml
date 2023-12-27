@@ -1,0 +1,20 @@
+base2camera:
+  xyz: "\"0.10 0.0  0.05\""
+  rpy: "\"0.0  0.0  0.0\""
+
+camera_log_level: INFO
+detector_log_level: INFO
+solver_log_level: INFO
+serial_log_level: INFO
+rune_detector_log_level: INFO
+rune_solver_log_level: INFO
+
+# 设置启动参数
+# true: 读取视频 false: 读取相机
+video_play: false 
+# true: 虚拟串口 false: 真实串口 
+virtual_serial: false 
+# true: 英雄解算 false: 传统解算
+hero_solver: false
+# true: 开启打符 false：关闭打符
+rune: true

@@ -3,13 +3,13 @@ ground_segmentation:
     n_threads: 4                # number of threads to use.
 
     r_min: 0.2                  # minimum point distance.
-    r_max: 50                   # maximum point distance.
+    r_max: 50.0                 # maximum point distance.
     n_bins: 120                 # number of radial bins.
     n_segments: 360             # number of radial segments.
 
-    max_dist_to_line: 0.1      # maximum vertical distance of point to line to be considered ground.
+    max_dist_to_line: 0.05      # maximum vertical distance of point to line to be considered ground.
 
-    sensor_height: 0.57         # sensor height above ground.
+    sensor_height: 0.6         # sensor height above ground.
     min_slope: 0.0              # minimum slope of a ground line.
     max_slope: 0.3              # maximum slope of a ground line.
     max_fit_error: 0.05         # maximum error of a point during line fit.
@@ -20,7 +20,6 @@ ground_segmentation:
 
     gravity_aligned_frame: ""   # Frame which has its z axis aligned with gravity. (Sensor frame if empty.)
 
-    latch: false                # latch output topics or not
     visualize: false            # visualize segmentation result - USE ONLY FOR DEBUGGING
 
     input_topic: "livox/lidar/pointcloud"
